@@ -1,0 +1,13 @@
+.navbar{
+  background-color: #11161c;
+  /* rgb(170, 115, 63), */
+  max-width: 1920px;
+  width: 100%;
+  z-index: 10;
+}
+
+.toolbar{
+ display: flex;
+ justify-content: space-around;
+}
+

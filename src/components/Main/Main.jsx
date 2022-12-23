@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Menu = () => {
+const Main = () => {
   return (
     <div>
-      MENU
+      UVETTA RESTORAN
     </div>
   );
 };
 
-export default Menu;
+export default Main;

@@ -1,10 +1,10 @@
 import React from 'react';
-import Reservatons from '../Reservations/Reservatons';
+import Reservations from '../Reservations/Reservations';
 
 const ReservetionsPage = () => {
   return (
     <div>
-      <Reservatons/>
+      <Reservations/>
     </div>
   );
 };

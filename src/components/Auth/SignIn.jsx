@@ -1,17 +1,24 @@
-import { Button, Grid, Link, TextField, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, Button,  TextField, Typography } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContextProvider'
+import { Grid } from 'semantic-ui-react';
+import { useAuth } from '../../context/AuthContextProvider';
 import './Auth.css'
-const Auth = () => {
+
+
+const SignIn = () => {
+
   const navigate = useNavigate();
-  
+
   const {
-    handleAddNew,
+    email,
+    password,
+    emailError,
+    passwordError,
     setPassword,
-    setEmail
-  } = useAuth(); 
+    setEmail,
+    handleSignin,
+  } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +32,7 @@ const Auth = () => {
   return (
     <div>
        <img className='bg-image' 
-          src='https://s1.1zoom.ru/b5050/551/Grapes_Wine_Black_background_Stemware_512143_1920x1080.jpg' alt=''/>
+       src='https://s1.1zoom.ru/b5050/551/Grapes_Wine_Black_background_Stemware_512143_1920x1080.jpg' alt=''/>
       <Box className='auth'
        sx={{
         width:'100%',
@@ -40,39 +47,50 @@ const Auth = () => {
             borderRadius:'8px',
             border: '1.5px solid grey',
             position:'absolute', 
-            right: '59%',
-            left: '20%',
+            right: '57%',
+            left: '19%',
             bottom: '30%',
-            top: '30%',
+            top: '35%',
             color:'white',
             backgroundColor:'#c1bab1'
            }}>
-
-            
             <Typography sx={{
-              paddingLeft:'80px',
+              paddingLeft:'40%',
               color:'black',
               fontSize:'20px',
               fontFamily:'serif'
               }}>
-              Add new account
+               LOG IN
            </Typography>
-            <Box>
-              <Grid item xs={12} sm={6}
+            <Box sx={{
+               paddingLeft:'3%',
+            }}>
+              <Grid item xs={12} 
                className='b-2'
                component="form"
                 sx={{
-                '& > :not(style)': { m: 1, width: '35ch' },
+                '& > :not(style)': { width: '35ch' },
                 }}
-                noValidate onSubmit={handleSubmit} 
+                noValidate
+                onSubmit={handleSubmit} 
               >
+ 
                <TextField 
                label="Email" 
                variant="standard"
-               autoComplete="email" 
+               autoComplete="email"   
                color='background'
-               onChange={(e) => setEmail(e.target.value)}
-                
+               id="email"
+               fullWidth
+                //helper-text
+                helperText={emailError}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                sx={{
+                  mt:'10%'
+                }}
                />
  
                <TextField 
@@ -81,39 +99,47 @@ const Auth = () => {
                type="password"
                autoComplete="new-password"
                color='background'
-               onChange={(e) => setPassword(e.target.value)}
+               id="password"
+               fullWidth
+               // ===============
+               helperText={passwordError}
+               value={password}
+               onChange={(e) => {
+                 setPassword(e.target.value);
+               }}
                />
               </Grid>
             </Box>
             <Box sx={{
-              paddingLeft:'85px',
+              paddingLeft:'40%',
             }}>
-             <Button
-                onClick={() => { 
-                handleAddNew();
+            
+              
+             <Button 
+               onClick={() => { 
+               handleSignin();
                 navigate('/home')}}
                 sx={{
                 color:'black',
                 fontSize:'14px', 
-                border:'1.5px solid black',
-                fontFamily:'serif',
-                mt:'15%',
-                marginRight:'25px'
-                }}> Add account
-              </Button>
+               border:'1.5px solid black',
+               fontFamily:'serif',
+               mt:'20%'
+               }}> Log in
+             </Button>
+            
             </Box>
-            <Grid container
-               justifyContent='center'
+
+             {/* <Grid container
                sx={{
-                mt:'5%',
+                mt:'20%'
                }}>
                 <Grid item>
-                  <Link onClick={() => navigate('/signin')}>
-                  {" Has account? Log In"}
+                  <Link onClick={() => navigate('/auth')}>
+                  {" Add your accout."}
                   </Link>
-                 
                 </Grid>
-              </Grid>
+              </Grid> */}
           </Box>
         </Box>
       </Box>
@@ -121,4 +147,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default SignIn;
